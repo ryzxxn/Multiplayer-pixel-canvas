@@ -1,0 +1,44 @@
+p{
+  margin: 0px;
+}
+
+.chat_box{
+  background-color: rgb(15, 15, 15);
+  margin: .7rem;
+  border-radius: .4rem;
+  padding: 1rem;
+}
+
+.header{
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+.canvas{
+  display: flex;
+  flex-wrap: wrap;
+  height: 250px;
+  width: 250px;
+}
+
+.pixel{
+  height: 5px;
+  width: 5px;
+  background-color: rgb(255, 255, 255);
+}
+.pixel:hover{
+  background-color: rgb(132, 0, 255);
+}
+
+.canvas_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.tool_container{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
