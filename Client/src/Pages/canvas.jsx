@@ -7,6 +7,7 @@ export default function Canvas() {
     pixel_id: null,
     pixel_color: color,
   });
+  
   const socket = io.connect('http://localhost:3001');
 
   useEffect(() => {
@@ -95,6 +96,7 @@ export default function Canvas() {
       });
     }
   }
+  
 
   return (
     <>
