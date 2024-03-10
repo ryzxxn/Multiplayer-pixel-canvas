@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
 export default function Canvas() {
-    const [Color, setColor] = useState('black')
+  const [color, setColor] = useState('black');
   const [pixeldata, setPixeldata] = useState({
     pixel_id: null,
-    pixel_color: Color,
+    pixel_color: color,
   });
   const socket = io.connect('http://localhost:3001');
 
@@ -20,6 +20,7 @@ export default function Canvas() {
     // Clean up the event listener when the component unmounts
     return () => {
       socket.off('pixel-client');
+      socket.off('pixel-data');
     };
   }, [socket]); // Only re-run the effect if the socket connection changes
 
@@ -32,6 +33,7 @@ export default function Canvas() {
           key={index}
           className='pixel'
           onMouseUp={() => changePixelColor(index)}
+          onDragOverCapture={() => changePixelColor(index)}
           onDoubleClick={() => resetPixelColor(index)}
         ></div>
       );
@@ -42,7 +44,7 @@ export default function Canvas() {
   function changePixelColor(pixel_index) {
     let pix = document.getElementById(pixel_index);
     if (pix) {
-      pix.style.backgroundColor = Color;
+      pix.style.backgroundColor = color;
     }
 
     // Use the callback function to ensure emission after state update
@@ -50,7 +52,7 @@ export default function Canvas() {
       const updatedData = {
         ...prevData,
         pixel_id: pixel_index,
-        pixel_color: Color,
+        pixel_color: color,
       };
       socket.emit('pixel-data', updatedData);
       return updatedData;
@@ -63,27 +65,42 @@ export default function Canvas() {
       pix.style.backgroundColor = 'white';
     }
 
+    // Emit the 'pixel-data' event only when the color changes
+    const updatedData = {
+      pixel_id: pixel_index,
+      pixel_color: 'white',
+    };
+
     // Use the callback function to ensure emission after state update
     setPixeldata((prevData) => {
-      const updatedData = {
+      const mergedData = {
         ...prevData,
-        pixel_id: pixel_index,
-        pixel_color: 'white',
+        ...updatedData,
       };
-      socket.emit('pixel-data', updatedData);
-      socket.off('pixel-data')
-      return updatedData;
+      socket.emit('pixel-data', mergedData);
+      return mergedData;
     });
+
+    // Remove the 'pixel-data' event listener to avoid duplicates
+    socket.off('pixel-data');
   }
 
-    function pickColor(e) {
-        setColor(e.target.value)
+  function pickColor(e) {
+    const newColor = e.target.value;
+    if (newColor !== color) {
+      setColor(newColor);
+      // Emit the 'pixel-data' event only when the color changes
+      socket.emit('pixel-data', {
+        pixel_id: pixeldata.pixel_id,
+        pixel_color: newColor,
+      });
     }
+  }
 
   return (
     <>
-        <div className='tool_container'>
-          <input onInput={pickColor} type='color'/>
+      <div className='tool_container'>
+        <input onInput={pickColor} type='color' />
       </div>
       <div className='canvas'>{pixelrender()}</div>
     </>

@@ -17,17 +17,19 @@ p{
 .canvas{
   display: flex;
   flex-wrap: wrap;
-  height: 250px;
-  width: 250px;
+  height: 200px;
+  width: 200px;
 }
 
 .pixel{
-  height: 5px;
-  width: 5px;
+  height: 4px;
+  width: 4px;
   background-color: rgb(255, 255, 255);
+  transition: 50ms;
 }
 .pixel:hover{
   background-color: rgb(132, 0, 255);
+  transition: 50ms;
 }
 
 .canvas_container{
