@@ -33,7 +33,6 @@ export default function Canvas() {
           key={index}
           className='pixel'
           onMouseUp={() => changePixelColor(index)}
-          onDragOverCapture={() => changePixelColor(index)}
           onDoubleClick={() => resetPixelColor(index)}
         ></div>
       );
