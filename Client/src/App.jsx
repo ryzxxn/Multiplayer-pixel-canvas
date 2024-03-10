@@ -1,17 +1,16 @@
 import './App.css'
-// import Send from './components/send.jsx'
-// import Chats from './components/chats.jsx'
-import Canvas from './components/canvas.jsx'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Canvas from './Pages/canvas.jsx'
 
 function App() {
 
   return (
     <>
-      {/* <Send/> */}
-      {/* <Chats/> */}
-      <div className='canvas_container'>
-        <Canvas/>
-      </div>
+    <BrowserRouter>
+      <Routes>
+          <Route index element={<Canvas/>} />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }

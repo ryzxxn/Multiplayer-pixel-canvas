@@ -32,7 +32,7 @@ export default function Canvas() {
           id={index}
           key={index}
           className='pixel'
-          onMouseUp={() => changePixelColor(index)}
+          onMouseDown={() => changePixelColor(index)}
           onDoubleClick={() => resetPixelColor(index)}
         ></div>
       );
@@ -101,7 +101,9 @@ export default function Canvas() {
       <div className='tool_container'>
         <input onInput={pickColor} type='color' />
       </div>
-      <div className='canvas'>{pixelrender()}</div>
+      <div className='canvas_container'>
+        <div className='canvas'>{pixelrender()}</div>
+      </div>
     </>
   );
 }
