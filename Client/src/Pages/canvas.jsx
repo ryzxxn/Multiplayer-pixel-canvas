@@ -8,7 +8,9 @@ export default function Canvas() {
     pixel_color: color,
   });
   
-  const socket = io.connect('http://localhost:3001');
+  // const socket = io.connect('http://localhost:3001');
+  const socket = io.connect('https://pixel-websocket.onrender.com');
+
 
   useEffect(() => {
     socket.on('pixel-client', (pixData) => {
