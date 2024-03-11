@@ -19,6 +19,10 @@ p{
   flex-wrap: wrap;
   height: 200px;
   width: 200px;
+  min-width: 200px;
+  min-height: 200px;
+
+  box-shadow: 4px 4px 15px black;
 }
 
 .pixel{
