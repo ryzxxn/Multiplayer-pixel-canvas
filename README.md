@@ -1,5 +1,9 @@
 # Realtime Pixel Drawing Canvas with WebSocket Integration
 
+## Deployed Application
+
+The application is deployed and can be accessed [Pixel-io](https://pixel-io.netlify.app/). Please note that due to the free tier hosting of the backend on Render.com, it may take around 40-50 seconds for the API to initialize. Once started, it should work as intended.
+
 ## Overview
 
 This repository houses a pixel drawing canvas application that utilizes WebSockets to synchronize pixel changes in real-time across all connected clients. The frontend is built with React, and the backend is powered by Node.js, Express, and WebSocket technology. The backend is hosted on Render.com using the free tier. The project was initiated to explore the fascinating world of real-time interactions, learn WebSocket concepts, and understand the technology's advantages and disadvantages.
@@ -32,7 +36,3 @@ The project was initiated to explore the cool concept of real-time interactions 
 
 1. **Race Condition Handling:** Addressing race conditions that arise when two clients attempt to update the same pixel simultaneously.
 2. **Optimized Data Flow:** Instead of sending the entire canvas state, each pixel is associated with a unique pixel_id and pixel_color, optimizing data flow and reducing bandwidth usage.
-
-## Deployed Application
-
-The application is deployed and can be accessed [here](https://pixel-io.netlify.app/). Please note that due to the free tier hosting of the backend on Render.com, it may take around 40-50 seconds for the API to initialize. Once started, it should work as intended.
