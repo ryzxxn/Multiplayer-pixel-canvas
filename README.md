@@ -20,6 +20,8 @@ This repository houses a pixel drawing canvas application that utilizes WebSocke
 - **Backend:** Node.js, Express, WebSocket
 - **Backend Hosting:** Render.com (Free Tier)
 
+![GIF Example](./example.gif)
+
 - ## Why?
 
 The project was initiated to explore the cool concept of real-time interactions and to delve into the specifics of WebSocket technology. Choosing Render.com for backend hosting on the free tier offers a cost-effective solution for the infrastructure.
