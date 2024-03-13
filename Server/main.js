@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const { Server } = require('socket.io');
-
 const cors = require('cors');
 
 app.use(cors());
@@ -15,13 +14,28 @@ const io = new Server(server, {
   }
 });
 
+const MAX_CONNECTIONS = 100;
+let connectedClients = 0;
+
 io.on('connection', (socket) => {
+  if (connectedClients >= MAX_CONNECTIONS) {
+    socket.disconnect(true);
+    console.log('Connection limit reached. Disconnecting client.');
+    return;
+  }
+
+  connectedClients++;
+
   socket.on('pixel-data', (pixelData) => {
     if (pixelData) {
       console.log(pixelData);
       // Use broadcast to emit to everyone except the sender
       socket.broadcast.emit('pixel-client', pixelData);
     }
+  });
+
+  socket.on('disconnect', () => {
+    connectedClients--;
   });
 });
 

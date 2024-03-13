@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { ChromePicker } from 'react-color';
+
+const socket = io.connect('http://localhost:3001');
 
 export default function Canvas() {
   const [color, setColor] = useState('black');
+  const [showPicker, setShowPicker] = useState(false);
   const [pixeldata, setPixeldata] = useState({
     pixel_id: null,
     pixel_color: color,
   });
-  
-  // const socket = io.connect('http://localhost:3001');
-  const socket = io.connect('https://pixel-websocket.onrender.com');
-
 
   useEffect(() => {
     socket.on('pixel-client', (pixData) => {
@@ -25,7 +25,7 @@ export default function Canvas() {
       socket.off('pixel-client');
       socket.off('pixel-data');
     };
-  }, [socket]); // Only re-run the effect if the socket connection changes
+  }, []);
 
   function pixelrender() {
     let pixels = [];
@@ -36,6 +36,7 @@ export default function Canvas() {
           key={index}
           className='pixel'
           onMouseDown={() => changePixelColor(index)}
+          onDragOver={() => changePixelColor(index)}
           onDoubleClick={() => resetPixelColor(index)}
         ></div>
       );
@@ -45,6 +46,7 @@ export default function Canvas() {
 
   function changePixelColor(pixel_index) {
     let pix = document.getElementById(pixel_index);
+
     if (pix) {
       pix.style.backgroundColor = color;
     }
@@ -87,24 +89,25 @@ export default function Canvas() {
     socket.off('pixel-data');
   }
 
-  function pickColor(e) {
-    const newColor = e.target.value;
-    if (newColor !== color) {
-      setColor(newColor);
-      // Emit the 'pixel-data' event only when the color changes
-      socket.emit('pixel-data', {
-        pixel_id: pixeldata.pixel_id,
-        pixel_color: newColor,
-      });
-    }
+  const handleColorChange = (newColor) => {
+    setColor(newColor.hex);
+  };
+
+  function togglePicker() {
+    setShowPicker(!showPicker);
   }
-  
 
   return (
     <>
       <div className='tool_container'>
-        <input onInput={pickColor} type='color' />
+        <p onClick={togglePicker}>{showPicker ? 'Close' : 'Color'}</p>
+        {showPicker && (
+          <div>
+            <ChromePicker color={color} onChangeComplete={handleColorChange} />
+          </div>
+        )}
       </div>
+
       <div className='canvas_container'>
         <div className='canvas'>{pixelrender()}</div>
       </div>
