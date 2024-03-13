@@ -100,7 +100,7 @@ export default function Canvas() {
   return (
     <>
       <div className='tool_container'>
-        <p onClick={togglePicker}>{showPicker ? 'Close' : 'Color'}</p>
+        <a className='tool' onClick={togglePicker}>{showPicker ? '✖' : '🖌'}</a>
         {showPicker && (
           <div>
             <ChromePicker color={color} onChangeComplete={handleColorChange} />
