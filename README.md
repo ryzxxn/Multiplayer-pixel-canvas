@@ -20,7 +20,7 @@ This repository houses a pixel drawing canvas application that utilizes WebSocke
 - **Backend:** Node.js, Express, WebSocket
 - **Backend Hosting:** Render.com (Free Tier)
 
-![GIF Example](./example.gif)
+![Video](./example.gif)
 
 - ## Why?
 
