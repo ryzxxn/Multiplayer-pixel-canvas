@@ -17,6 +17,10 @@ const io = new Server(server, {
 const MAX_CONNECTIONS = 100;
 let connectedClients = 0;
 
+app.get('/pixel-wake', (req, res) => {
+  res.send('true'); // Respond with 'true'
+});
+
 io.on('connection', (socket) => {
   if (connectedClients >= MAX_CONNECTIONS) {
     socket.disconnect(true);
