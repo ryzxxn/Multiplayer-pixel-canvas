@@ -6,7 +6,7 @@ const socket = io.connect('https://pixel-websocket.onrender.com');
 
 export default function Canvas() {
   const [color, setColor] = useState('black');
-  const [showPicker, setShowPicker] = useState(false);
+  const [showPicker, setShowPicker] = useState(true);
   const [pixeldata, setPixeldata] = useState({
     pixel_id: null,
     pixel_color: color,
