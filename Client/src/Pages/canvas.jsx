@@ -101,6 +101,8 @@ export default function Canvas() {
     <>
       <div className='tool_container'>
         <a className='tool' onClick={togglePicker}>{showPicker ? '✖' : '🖌'}</a>
+        <p>Click to draw</p>
+        <p>DoubleClick to erase</p>
         {showPicker && (
           <div>
             <ChromePicker color={color} onChangeComplete={handleColorChange} />
