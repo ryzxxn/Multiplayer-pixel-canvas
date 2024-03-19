@@ -48,7 +48,7 @@ p{
   position: absolute;
   left: 0px;
   top: 0px;
-  /* padding: 2rem; */
+  padding: 0rem 1rem;
   font-size: 2rem;
 }
 
@@ -56,10 +56,20 @@ p{
   cursor: pointer;
   transition: 100ms;
   font-weight: 700;
+  font-size: 1.4rem;
 }
 
 .tool:hover{
   font-weight: 700;
   text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.514);
   transition: 100ms;
+}
+
+.instruction{
+  font-size: 1rem;
+}
+
+.instruction_cont{
+  display: flex;
+  gap: 2rem;
 }
