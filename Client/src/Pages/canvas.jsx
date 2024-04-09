@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { ChromePicker } from 'react-color';
 
-const socket = io.connect('https://pix-backend.netlify.app');
+const socket = io.connect('https://pixel-io.onrender.com');
 
 export default function Canvas() {
   const [color, setColor] = useState('black');
